@@ -1,2 +1,6 @@
 language = "cpp"
 run = "cd lab_code && cmake CMakeLists.txt && make && ./ApexLab"
+
+[nix]
+nix = "replit.nix"
+channel = "stable-22_05"
