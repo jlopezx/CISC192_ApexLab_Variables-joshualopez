@@ -1,6 +1,5 @@
 language = "cpp"
-run = "cd lab_code && cmake CMakeLists.txt && make && ./ApexLab"
+run = "cd lab_code && ./ApexLab"
+entrypoint = "testbench.cpp"
 
-[nix]
-nix = "replit.nix"
-channel = "stable-22_05"
+compile = "cd lab_code && cmake CMakeLists.txt && make"
