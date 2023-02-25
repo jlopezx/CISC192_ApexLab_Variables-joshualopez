@@ -33,14 +33,46 @@ int main()
     // in the second string.
 
     // Testing minutes to 12 hour time
+    // Zero test
+    test(minutes_to_12hour_time, "0", "0:0 !");
+    // Just minutes test
+    test(minutes_to_12hour_time, "10", "0:10 !");
+    // Just hours test
     test(minutes_to_12hour_time, "60", "1:0 !");
+    // Hours and minutes test
+    test(minutes_to_12hour_time, "61", "1:1 !");
+    // More than one hour test
     test(minutes_to_12hour_time, "121", "2:1 !");
+    // More than 12 hour test
     test(minutes_to_12hour_time, "785", "1:5 !");
+    // 24 hour test
+    test(minutes_to_12hour_time, "1441", "0:1 !");
+    // More than 24 hour test
+    test(minutes_to_12hour_time, "45678", "5:18 !");
 
     // Testing hours minutes seconds to 12 hour time
+    // Zero test
     test(numbers_to_12hour_time, "0 0 0", "0:0.0 !");
+    // Nominal test
+    test(numbers_to_12hour_time, "1 1 1", "1:1.1 !");
+    // Seconds to minutes
+    test(numbers_to_12hour_time, "0 0 60", "0:1.0 !");
+    // Seconds to hours
+    test(numbers_to_12hour_time, "0 0 3600", "1:0.0 !");
+    // Minutes to hours
+    test(numbers_to_12hour_time, "0 60 0", "1:0.0 !");
+    // Second and minutes to hours
+    test(numbers_to_12hour_time, "0 59 60", "1:0.0 !");
+    // Decimal hours
     test(numbers_to_12hour_time, "60.5 60 60", "1:31.0 !");
+    // High precision decimal hours
+    test(numbers_to_12hour_time, "129000.25834 100 2", "1:55.32 !");
+
+    // Random tests
     test(numbers_to_12hour_time, "1 121 12", "3:1.12 !");
+    test(numbers_to_12hour_time, "1.1 121 12", "3:7.12 !");
+    test(numbers_to_12hour_time, "60.51 60 3605", "2:30.41 !");
+    test(numbers_to_12hour_time, "10 600 24", "8:0.24 !");
 
     return 0;
 }
