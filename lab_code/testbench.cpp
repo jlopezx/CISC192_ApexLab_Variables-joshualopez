@@ -8,16 +8,23 @@
 
 using namespace std;
 
+static int testNum = 0;
+static int testsPassed = 0;
+
 #define TEST_FUNC_PTR void (*test_func)(stringstream&, stringstream&)
 void test(TEST_FUNC_PTR, const string& input, const string& expected)
 {
+    testNum++;
     stringstream in_stream(input);
     stringstream out_stream;
     test_func(in_stream, out_stream);
 
+    cout << "test " << testNum << ": ";
+    
     if(expected == out_stream.str())
     {
         cout << "PASS" << endl;
+        testsPassed++;
     }
     else
     {
@@ -74,5 +81,13 @@ int main()
     test(numbers_to_12hour_time, "60.51 60 3605", "2:30.41 !");
     test(numbers_to_12hour_time, "10 600 24", "8:0.24 !");
 
+    if (testNum != 20) {
+        cout << "Some tests are missing :( Check your code again, and please don't modify testbench.cpp!" << endl;
+    } else if (testsPassed != 20) {
+        cout << "Some tests did not pass :(" << endl;
+    } else {
+        cout << "All tests passed! Hooray! 🥳" << endl;
+    }
+    
     return 0;
 }
