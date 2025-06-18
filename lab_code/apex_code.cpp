@@ -1,7 +1,3 @@
-#include <iostream>
-#include <sstream>
-#include <iomanip>
-#include "apex_code.h"
 /* File: apex_code.cpp
  * Class: CISC 192 - C++
  * Professor: Chow
@@ -14,75 +10,56 @@
  *    raw hours, raw minutes, and raw seconds and converts them to a 12-clock system format with the
  *    hour being with 0-11, and minutes and seconds being within 0-59 in the following order and
  *    format: "<hours>:<minutes>.<seconds> !" */
+
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+#include "apex_code.h"
+
 using namespace std;
 
-// Declared these double variables to hold the inputs from the caller (testbench.cpp in this case)
-double inputSeconds;
-double inputMinutes;
-double inputHours;
+/* Declared these double variables to hold the inputs from the caller (testbench.cpp in this case)
+ * In this scope because both functions will use these variables. */
+double inputSeconds, inputMinutes, inputHours;
 
 // Constants declared for time conversion and clock cycle as they are often used for conversion and modulo
 const int TIME_CONVERSION = 60;
 const int CLOCK_CYCLE = 12;
 
 void minutes_to_12hour_time(stringstream &cin, stringstream &cout) {
-    // Place code for translating minutes to 12 hour time
-    // Pretend this is your main function and you can use cin/cout
-    // as you would in main.
-
-    // If you want to print to the console for debugging use std::cout.
-    // Use cout for your final solution.
-
-    // First you want to get user input with cin
-    // Do any needed calculations
-    // Create output with cout
 
 	// Used to hold simple time converstions and for outputs
-	int outputMinutes;
-	int outputHours;
+	int outputMinutes, outputHours;
 
 	// Passes in the system inputs into inputMinutes
 	cin >> inputMinutes;
 
 	// -static casts are used because we're using modulo operations
+	// Divides by time conversion to convert minutes to hours and aligns it in a 12-hour format.
+	outputHours = (static_cast<int>(inputMinutes) / TIME_CONVERSION) % CLOCK_CYCLE;
 	// -Manipulates inputMinutes by getting the remainder through modulo 60
 	outputMinutes = static_cast<int>(inputMinutes) % TIME_CONVERSION;
-	// -Subtracts the remainder minutes from what can be converted into perfect hours.
-	outputHours = (static_cast<int>(inputMinutes - outputMinutes) / TIME_CONVERSION) % CLOCK_CYCLE;
 	// -Outputs hours and minutes in a 12 hour : 60 minute format
 	cout << outputHours << ":" << outputMinutes << " !";
 }
 
 void numbers_to_12hour_time(stringstream& cin, stringstream& cout) {
-    // Place code for translating hours, minutes and seconds to 12 hour time
-    // Pretend this is your main function and you can use cin/cout
-    // as you would in main.
-
-    // If you want to print to the console for debugging use std::cout.
-    // Use cout for your final solution.
 
 	/* -Double is used for all these variables as majority of the values involve floating-point values
 	 * -My clock variables used for outputs. Easier to read and understand code with these. */
-	double clockOutputSecs;
-	double clockOutputMins;
-	double clockOutputHours;
+	double clockOutputSecs, clockOutputMins, clockOutputHours;
 	/* -Remainder variables are going to hold remainder values which will be applied with a modulo of
 	 *   TIME_CONVERSION (60) to get what would be left over after converting minutes and seconds*/
-	double minutesRemainder;
-	double secsRemainder;
+	double minutesRemainder, secsRemainder;
 	/* -The next two variables are used for converting hours to minutes and seconds since inputHours
 	 *   can have a decimal point value. */
-	double hourToMin;
-	double minToSec;
+	double hourToMin, minToSec;
 	// -These variables will hold the converted minutes and seconds to hours
-	double minToHours;
-	double secToHours;
+	double minToHours, secToHours;
 	// -This variable would be used to hold the converted value from seconds to minutes
 	double secToMin;
 	// -Total variables simply hold their respective total values after calculations.
-	double totalMinutes;
-	double totalHours;
-	double totalSeconds;
+	double totalMinutes, totalHours, totalSeconds;
 
 	// -Takes in the inputs from testbench.cpp.
 	cin >> inputHours;
